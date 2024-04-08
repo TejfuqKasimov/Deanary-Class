@@ -1,7 +1,7 @@
 // "Copyright 2024 Kasimov T.
 
-#ifndef C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_GROUP_H_
-#define C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_GROUP_H_
+#ifndef INCLUDE_GROUP_H_
+#define INCLUDE_GROUP_H_
 
 #include <string>
 #include <vector>
@@ -22,7 +22,8 @@ class Group {
 
     void addStudent(Student*);
 
-    void chooseHead(const Student&);
+    void chooseHead(const Student* = nullptr);
+    Student* getHead();
 
     Student* getStudent(const std::string);
     Student* getStudent(const unsigned __int64 temp_id);
@@ -39,4 +40,4 @@ class Group {
     std::string getSpec();
 };
 
-#endif  // C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_GROUP_H_
+#endif  // INCLUDE_GROUP_H_

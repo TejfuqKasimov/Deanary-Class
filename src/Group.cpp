@@ -24,8 +24,8 @@ void Group::addStudent(Student* temp_student) {
     students.push_back(temp_student);
 }
 
-void Group::chooseHead(const Student& temp_head) {
-    head = &const_cast<Student&>(temp_head);
+void Group::chooseHead(const Student* temp_head) {
+    head = const_cast<Student*>(temp_head);
 }
 
 Student* Group::getStudent(const std::string temp_name) {
@@ -93,4 +93,8 @@ std::vector <Student*>* Group::getStudent() {
 
 std::string Group::getSpec() {
     return spec;
+}
+
+Student* Group::getHead() {
+    return head;
 }

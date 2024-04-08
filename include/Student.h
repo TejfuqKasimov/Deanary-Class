@@ -1,7 +1,7 @@
 // "Copyright 2024 Kasimov T.
 
-#ifndef  C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_STUDENT_H_
-#define  C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_STUDENT_H_
+#ifndef  INCLUDE_STUDENT_H_
+#define  INCLUDE_STUDENT_H_
 
 #include <string>
 #include <vector>
@@ -32,4 +32,4 @@ class Student {
     std::vector<int>* getMark();
 };
 
-#endif  //  C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_STUDENT_H_
+#endif  // INCLUDE_STUDENT_H_

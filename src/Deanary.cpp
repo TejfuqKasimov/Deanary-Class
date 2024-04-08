@@ -5,7 +5,7 @@
 #include <sstream>
 #include <iostream>
 #include <random>
-#include <time.h>
+#include <ctime>
 #include <iomanip>
 #include <locale>
 
@@ -64,12 +64,13 @@ void Deanary::hireStudent(const std::string dataPath) {
     std::string DataLine;
     while (std::getline(DeanaryData, DataLine)) {
         unsigned __int64 temp_id;
-        std::string temp_surname, temp_name, temp_fatheName, temp_group;
+        std::string temp_surname, temp_name,
+                    temp_fatheName, temp_group, is_head;
 
         std::istringstream istreamData(DataLine);
 
         istreamData >> temp_id;
-        istreamData >> temp_surname >> temp_name
+        istreamData >> is_head >> temp_surname >> temp_name
                     >> temp_fatheName >> temp_group;
 
         std::string temp_fio = temp_surname + ' ' +
@@ -81,10 +82,13 @@ void Deanary::hireStudent(const std::string dataPath) {
 
         int mark;
         while (istreamData >> mark) temp_student->addMark(mark);
+        if (is_head == "Да") {
+            getGroup(temp_group)->chooseHead(temp_student);
+        }
     }
 }
 
-Group* Deanary::getGroup(const std::string temp_title) {
+Group* Deanary::getGroup(std::string temp_title) {
     for (Group* x : groups) {
         if (x->getTitle() == temp_title) {
             return x;
@@ -104,10 +108,20 @@ void Deanary::addMarksToAll() {
 }
 
 void Deanary::moveStudents(const std::vector <Student*>& temp_students,
-                           const Group& temp_group) {
+                           const Group* temp_group) {
     for (Student* x : temp_students) {
+        if (x == x->getGroup()->getHead()) {
+            Group* y = x->getGroup();
+            y->chooseHead();
+            x->removeGroup();
+            x->addToGroup(const_cast<Group*>(temp_group));
+            Student* k = *y->getStudent()->begin() +
+                        (rand() % y->getStudent()->size());
+            y->chooseHead(k);
+            continue;
+        }
         x->removeGroup();
-        x->addToGroup(&const_cast<Group&>(temp_group));
+        x->addToGroup(const_cast<Group*>(temp_group));
     }
 }
 
@@ -137,7 +151,13 @@ void Deanary::safeStaff(std::string pathToStudents, std::string pathToGroups) {
 
     for (Group* x : groups) {
         for (Student* y : *x->getStudent()) {
-            DeanaryData << y->getId() << ' ' <<y->getFio() <<
+            DeanaryData << y->getId();
+            if (y == x->getHead()) {
+                DeanaryData << " Да";
+            } else {
+                DeanaryData << " Нет";
+            }
+            DeanaryData << ' ' <<y->getFio() <<
                            " " << y->getGroup()->getTitle() << ' ';
             for (int k : *y->getMark()) {
                 DeanaryData << k << ' ';
@@ -151,9 +171,11 @@ void Deanary::safeStaff(std::string pathToStudents, std::string pathToGroups) {
 void Deanary::initHeads() {
     srand(time(NULL));
     for (Group* x : groups) {
-        Student* y = *x->getStudent()->begin() +
-                    (rand() % x->getStudent()->size());
-        x->chooseHead(*y);
+        if (x->getHead() == nullptr) {
+            Student* y = *x->getStudent()->begin() +
+                        (rand() % x->getStudent()->size());
+            x->chooseHead(y);
+        }
     }
 }
 
@@ -171,4 +193,15 @@ void Deanary::addGroup(const Group& temp_group) {
     if (!containsGroup(const_cast<Group&>(temp_group).getTitle())) {
         groups.push_back(&const_cast<Group&>(temp_group));
     }
+}
+
+Student* Deanary::getStudent(const unsigned __int64 temp_id) {
+    for (Group* x : groups) {
+        for (Student* y : *x->getStudent()) {
+            if (y->getId() == temp_id) {
+                return y;
+            }
+        }
+    }
+    return nullptr;
 }

@@ -1,7 +1,7 @@
 // "Copyright 2024 Kasimov T.
 
-#ifndef C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_DEANARY_H_
-#define C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_DEANARY_H_
+#ifndef INCLUDE_DEANARY_H_
+#define INCLUDE_DEANARY_H_
 
 #include <string>
 #include <vector>
@@ -22,13 +22,14 @@ class Deanary {
     void addGroup(const Group&);
     bool containsGroup(const std::string);
     void hireStudent(const std::string);
-    Group* getGroup(const std::string);
+    Group* getGroup(std::string);
     void addMarksToAll();
-    void moveStudents(const std::vector <Student*>&, const Group&);
+    void moveStudents(const std::vector <Student*>&, const Group*s);
     void safeStaff(std::string = "", std::string = "");
     void initHeads();
     void fireStudent(const std::vector <Student*>&);
     std::vector <Group*>* getGroup();
+    Student* getStudent(const unsigned __int64);
 };
 
-#endif  // C__USERS_TOFIK_DESKTOP_DEANERY_INCLUDE_DEANARY_H_
+#endif  // INCLUDE_DEANARY_H_
