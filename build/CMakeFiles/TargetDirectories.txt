@@ -1,0 +1,4 @@
+C:/Users/tofik/Desktop/Deanery/build/CMakeFiles/deanery_lib.dir
+C:/Users/tofik/Desktop/Deanery/build/CMakeFiles/Deanery.dir
+C:/Users/tofik/Desktop/Deanery/build/CMakeFiles/edit_cache.dir
+C:/Users/tofik/Desktop/Deanery/build/CMakeFiles/rebuild_cache.dir
