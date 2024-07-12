@@ -1,2 +1,0 @@
-C:\msys64\ucrt64\bin\ar.exe qc libdeanery_lib.a CMakeFiles/deanery_lib.dir/src/Deanary.cpp.obj CMakeFiles/deanery_lib.dir/src/Group.cpp.obj CMakeFiles/deanery_lib.dir/src/Student.cpp.obj CMakeFiles/deanery_lib.dir/src/main.cpp.obj
-C:\msys64\ucrt64\bin\ranlib.exe libdeanery_lib.a
